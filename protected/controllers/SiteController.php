@@ -6,7 +6,7 @@ class SiteController extends Controller {
      * @var string the default layout for the views. Defaults to '//layouts/column2', meaning
      * using two-column layout. See 'protected/views/layouts/column2.php'.
      */
-    public $layout = '//layouts/column2';
+    public $layout = '//layouts/column1';
 
     /**
      * Declares class-based actions.
@@ -31,19 +31,23 @@ class SiteController extends Controller {
      * when an action is not explicitly requested by users.
      */
     public function actionIndex() {
-        if (!Yii::app()->request->isAjaxRequest) {
-            $this->render('index');
-        } else {
-            $this->renderPartial('index', '', FALSE, TRUE);
-        }
+        $this->render('index');
     }
 
     public function actionSearch() {
         if (!Yii::app()->request->isAjaxRequest) {
             throw new CHttpException(404);
         }
-
+        yii::app()->clientScript->scriptMap['jquery.js'] = false;
         $this->renderPartial('search', '', FALSE, TRUE);
+    }
+    
+    public function actionSearchResult() {
+        if (!Yii::app()->request->isAjaxRequest) {
+            throw new CHttpException(404);
+        }
+        yii::app()->clientScript->scriptMap['*.js'] = false;
+        $this->renderPartial('searchResult', '', FALSE, TRUE);
     }
 
     /**
