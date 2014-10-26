@@ -39,7 +39,7 @@ class SiteController extends Controller {
             throw new CHttpException(404);
         }
         yii::app()->clientScript->scriptMap['jquery.js'] = false;
-        $this->renderPartial('search', '', FALSE, TRUE);
+        $this->renderPartial('search', '', FALSE,true);
     }
     
     public function actionSearchResult() {
@@ -47,7 +47,7 @@ class SiteController extends Controller {
             throw new CHttpException(404);
         }
         yii::app()->clientScript->scriptMap['*.js'] = false;
-        $this->renderPartial('searchResult', '', FALSE, TRUE);
+        $this->renderPartial('searchResult', '', FALSE,true);
     }
 
     /**
